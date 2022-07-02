@@ -4,32 +4,6 @@ import numpy as np
 import io
 import base64
 
-
-
-app = Flask(__name__)
-
-app.secret_key="a"
-
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-@app.route("/glowna")
-def glowna():
-    return render_template("index.html")
-
-@app.route("/funkcja", methods=["POST", "GET"])
-def funkcja():
-    return render_template("funkcja.html", Rysowanie = False)
-
-@app.route("/rysuj", methods=["POST", "GET"])
-def rysuj():
-    return render_template("funkcja.html", plot = wykres()[0], info = wykres()[1], Rysowanie = True)
-
-@app.route("/autorzy")
-def autorzy():
-    return render_template("autorzy.html")   
-
 def wykres():
     img = io.BytesIO()
     l1 = request.form['a_input'] #dane z ramek do wprowadzania liczb
@@ -88,3 +62,29 @@ def wykres():
     url = base64.b64encode(img.getvalue()).decode()
     plt.close()
     return ('data:image/png;base64,{}'.format(url), kom)
+
+
+
+app = Flask(__name__)
+
+app.secret_key="a"
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/glowna")
+def glowna():
+    return render_template("index.html")
+
+@app.route("/funkcja", methods=["POST", "GET"])
+def funkcja():
+    return render_template("funkcja.html", Rysowanie = False)
+
+@app.route("/rysuj", methods=["POST", "GET"])
+def rysuj():
+    return render_template("funkcja.html", plot = wykres()[0], info = wykres()[1], Rysowanie = True)
+
+@app.route("/autorzy")
+def autorzy():
+    return render_template("autorzy.html")   
