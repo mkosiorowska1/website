@@ -63,8 +63,6 @@ def wykres():
     plt.close()
     return ('data:image/png;base64,{}'.format(url), kom)
 
-
-
 app = Flask(__name__)
 
 app.secret_key="a"
